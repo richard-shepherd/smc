@@ -1,0 +1,36 @@
+Limitations
+-----------
+- What are the limitations of the framework? Compared with:
+  - DSC
+  - LQ2
+  - The Wire
+  - Google global distribution
+
+
+DSC
+---
+- Can it do everything that DSC can? DSC provides these things:
+  - Persisted config as live data and distributes it globally
+  - Fairly low-latency messaging for live updates
+  - Broadcast data to multipe clients
+  - Last value caching
+  - Subscriptions to live data
+  - On-demand requests for data / streams
+  - Backwards compatibility of data / messages between versions
+  - Visibility of (most) data in the system
+
+
+
+Market data
+-----------
+- How suitable is this to deliver market-data
+  - Perhaps to other services?
+
+- Answer 1: It can deliver streaming market-data with (fairly) low latency
+
+- Answer 2: In your own services, you do not have to only use data from other
+            services in this framework. You can go direct to other data-sources.
+
+- Answer 3: Unless feed-handlers are built as these services, there is always an
+            extra hop in getting data via a service.
+

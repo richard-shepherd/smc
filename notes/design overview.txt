@@ -1,0 +1,61 @@
+Design overview
+---------------
+- The core infrastructure uses low-latency messaging
+  - Perhaps ZeroMQ or similar
+  - There could be adaptors on the edges of the system to provide some services as http web-services.
+    - But this is not how the core services are created, as we need:
+      - Lower latency
+      - Binary messages
+      - Streaming
+
+Protocol
+--------
+- Note: The protocol below could / should be wrapped up in a client library
+  - In C# all requests (including for snapshots) are disposable:
+    - For stream requests, this stops the stream and it calculations (depending on sharing at the worker)
+    - You do not need to dispose snapshot requests once they have returned data
+    - But you can dispose them before they have returned data
+
+- Client request message:
+  - Client info (used for versioning, prioritization)
+  - Service-type being requested
+  - Stream-type: Stream / Snapshot
+  - Action: Start / Stop (note: you can stop a snapshot request before receiving data back from it)
+  - Request ID: GUID (to identify and kill a request)
+  - Request-specific parameters / data:
+    - JSON, and
+    - Binary
+
+- For streams, the client is provided with a GUID to identify the request
+  - This is used when stopping the stream request
+  - Q: Will this be provided by the server (safer), or by the client (easier)?
+
+- Service response message:
+  - Request ID
+  - JSON data
+  - Binary data
+  - Note: The response will not include any request info (except the ID)
+    - This can be passed back in callbacks by a client library, which can associate it 
+      with the request and its callback
+
+- If a service calls another serice as part of its work, it passes on the 
+  original client info
+  - So that it gets the appropriate version of the calculation
+
+
+Architecture
+------------
+- Master Request Broker
+  - Client request are sent to the MRB
+  - Checks if there is a specific version of the service for use with the client.
+    If not, it uses the DEFAULT version (which it resolves to an actual version, eg 2.1.3)
+  - Checks that there is a Specific Request Broker for the version
+    - Creates one if necessary (finding a server for it)
+    - Forwards the request to the SRB
+
+- Specific Request Broker
+  - Is launched specifying the service name and version
+  - Dynamically loads SRB / calculation dll for the specified version
+
+
+

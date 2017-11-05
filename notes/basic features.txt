@@ -1,0 +1,17 @@
+Basic features
+--------------
+- Launcher process on each server
+  - Spawned by a service, like the BB launcher
+
+- Generic Worker component with plug-in calculation dlls.
+
+- C# graph for use inside Workers
+ 
+- Generic Specific Request Broker (SRB) component 
+  - With plug-in logic forspecific requests
+
+- SRB and calculation logic are in the same dll
+  - Two classes / interfaces in the same dll
+
+
+

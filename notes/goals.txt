@@ -1,0 +1,51 @@
+Goals
+-----
+- A client can make a request and get either:
+  - A stream of replies
+  - A single reply
+
+- Streaming replies may be very slow
+  - For example for date or "static" data
+
+- Streaming replies may be very fast
+
+- The system should scale with:
+  - The number of services supported
+  - The number of clients requesting data
+  - SO: We should be able to add hardware and scale (at least) linearly.
+
+- On-demand processing
+  - Service processes (of the right version) are created when there is work for them.
+  - New workers should be created very fast when requests are made
+  - NOTE: Some workers will take time to start up. 
+    - They may need to load state (eg, Westminster markets etc)
+    - SO: For some services, we may want to pre-create workers before work has been requested.
+
+- Load-balancing
+  - Balancing processor load across servers
+  - Balancing load across worker processes
+  - Client-specific load-balancing
+    - ie, some clients get more resources than others
+
+- Versioning:
+  - We should be able to deploy new version of code into the running system
+    - At least, we will be able to deploy new versions side-by-side
+    - Ideally, we would be able to dynmically switch existing streaming requests to a new version.
+  - Multiple versions will be supported at the same time side-by-side
+    - Different clients can be configured to use different versions of each service
+
+- Language support
+  - C#
+  - Python
+  - It would be good to support other languages for creating the worker code
+
+- Deployment
+  - Should be easy, and part of the framework
+
+- Multi-instance / global failover
+  - The system should be able t be deployed in multiple sites
+  - This should look like one unified system
+  - Clients use local services by default, but can fail over to remote ones
+
+- Visibility
+  - 

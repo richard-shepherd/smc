@@ -1,0 +1,26 @@
+Folder structure
+----------------
+- SMC (simple microservices container)
+  - SMCService: all it does is launch the Launcher
+  - [service-name] - eg,BNPP.FPG.MatrixGenerationService (names are best scoped like this)
+    - [versions] - each version in its own folder
+      - SRB and calculation dll
+      - All dependencies
+
+
+Notes
+-----
+- Service names may be best scoped / namespaced to avoid name clashes, for example:
+  - BNPP.FPG.MatrixGeneration      
+  - SMC.SystemInfo
+
+- Version folders could be quite large
+  - As they hold all dependencies of the service
+  - There could be a lot of overlap with other services
+  - So this is quite wasteful of disk space.
+    - But disks are (should be) big and cheap.
+
+- Ultimately we will not be able to deploy every service to every server
+  - There will be too many
+
+

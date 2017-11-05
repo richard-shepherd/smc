@@ -1,0 +1,32 @@
+How do we share calculations which use the same markets / state?
+---------------------------------------------------------------
+- Some state will be expensive to obtain, but can then be used to calculate 
+  values for multipe requests. For example:
+   - Westminster markets, used to calculate various prices
+   - Complex DB queries, used to extract multiple pieces of data
+
+- In other words: workers are (or at least can be) stateful, and we may want to
+  assign calculations to existing workers which already hold useful state.
+
+- Equally, we may not always want to do this:
+  - We may want to load the same state in multiple worker for load-balancing
+    - eg, we may not want to assign all calculation (say one million of them) to only one worker.
+    - We may want to prioritize certain calculations, so that one client gets its own worker
+      even though the state is already available elsewhere.
+
+- Question: Do workers only ever do calculations for one type of request?
+            - For example, say we have SWAP and FWD requests.
+              - Can these be done in the same worker if they use the same market?
+
+- Answer 1: NO: Different services need their own workers.
+
+- Answer 2: YES: The actual worker code is a simple add-in (say a dll) for the generic 
+            Worker component (which loads calculation add-ins as required).
+            - So: A worker can host multiple different calculation add-ins if necessary.
+              - These can all access shared resources such as markets.
+              - Hosted in a graph inside the Worker.
+
+
+
+
+

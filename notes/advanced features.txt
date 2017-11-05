@@ -1,0 +1,51 @@
+Advanced features
+-----------------
+- Client-specific prioritization / resource allocation
+
+- Automatic discovery of nearest Master Request Brokers
+  - Load-balancing between MRBs
+    - Maybe via data broadcast to clients
+    - Ping time to each MRB
+    - Current load of each MRB (requests / sec)
+
+- Automated testing tool for services
+
+- Admin tools (web-based?) to:
+  - View active services
+  - View active MRBs and SRBs
+  - View load on services and brokers (messages / sec in and out, CPU, memory)
+  - View load on servers
+  - Overall capacity gauges (dials) for whole system
+    - Ability to drill in to:
+      - Sub-systems (regions)
+      - Individual servers
+      - Individual services
+  - Filter by client
+  - Filter by service (as the services could be on any server)
+
+- Ability to create services before they are needed
+
+- Abilty to pin services to servers
+  - And exclude servers from general use, ie reserve them for certain services
+
+- Launcher also acts as a deployer to put new versions on servers
+
+- Allocation of different services (or groups of services) to different groups of servers
+  - (Initially all services will be available on all servers???)
+
+- Sharing of calculations
+  - ie, if two clients ask for the same data or calculation, we only calculate it once
+
+- Initially we will have one SRB per version (per location)
+  - Later we will need to be able to load-balance between multiple SRBs
+  - AND: They need to have decentralized logic to manage sharing of calculations
+    - ie, they need to know which calculations are active from other SRBs
+    - (This could be a "best efforts" system, and if not perfect then some repeated calcs 
+      would be done, but many would be shared.)
+
+- Graph: It would be very good if nodes could be defined in multiple libraries (dlls)
+  - These would be loaded on-demand if other nodes needed them.
+  - So: Maybe nodes have a section to express their library dependencies (as well as their actual parents)
+
+- Tool to determine which versions of services are used
+  - And to clean up unused versions
