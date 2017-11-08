@@ -1,0 +1,18 @@
+How do we persist config?
+-------------------------
+- We need to persist various pieces of data. For example:
+  - List of all servers in an environment
+  - Service specific info
+    - Override for max requests per worker
+    - verride for which servers to use
+
+- This data needs to be:
+  - Persisted
+  - Loaded at startup
+  - Editable
+  - Available as live, subscribable updates
+  - ie, like DSC config
+
+- We need a GUI to interact with this
+  - A C# GUI?
+  - A web interface?

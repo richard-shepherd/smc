@@ -1,0 +1,40 @@
+Launching processes
+-------------------
+- How do MRBs launch new SRBs, and how do SRBs launch new Workers?
+
+- In particular, there may be multiple MRBs, SRBs and Workers
+  - These may be on different machines.
+  - If we get a number of requests at the same time, we do not (necessarily) want
+    to create multiple processes.
+    - For example, say a client sends 5 requests for a service
+      - Initially there are no SRBs or Workers for them
+      - The MRB gets the first request
+      - So the MRB needs to create an SRB for the right version
+      - Before it has started up, it gets the second request
+      - It wants not to create another SRB, as it could be handled by the one being created
+      - Equally, once the SRB has been created, it may not want to create multiple Workers
+
+- On the other hand, sometimes we *may* want to create multiple proceses, for example:
+  - A client sends 10000 requests for a particular request-type
+  - We decide (or have config) that specifies that a maximum of 1000 requests
+    should be handled by any one process
+  - So: The SRB should know that it needs to create 10 processes
+ 
+
+- QUESTION: How does the MRB get the inbox of a new SRB? And an SRB get the inbox of a new Worker?
+
+
+Basic architecture / system
+---------------------------
+- Could we start with a system that had:
+  - Only one MRB
+  - Only one SRB per request-type and version?
+  - Does not do calculation-sharing 
+  - *Does* create multiple Workers if needed
+
+
+
+Workflow for starting Worker processes
+--------------------------------------
+- SRB receives a new request
+

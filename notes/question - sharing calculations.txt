@@ -8,7 +8,7 @@ How will calculation sharing work?
           If it is done as a TCP "broadcast" then it will slow down
           the publisher as we add more clients.
 
-- Note 2: We onyl want to share if the clients are asking for the same 
+- Note 2: We only want to share if the clients are asking for the same 
           version of the calculation (eg, v2.1.3) as values may be different
           between different versions.
 
@@ -35,4 +35,17 @@ How will calculation sharing work?
             There could be a central "database" (or other service holding this info).
 
 
+How do clients receive the results?
+-----------------------------------
+- Question: The (multiple) clients all need to be able to subscribe to the results data - 
+            or have it sent to them, one way or another.
+
+- Answer 1: When a client makes a request, it receives back information about how to 
+            subscribe to the replies. This includes:
+            - The type of transport, eg TCP, UDP etc
+            - Topic / ID to use when subscribing
+           
+
+
+        
 

@@ -1,0 +1,21 @@
+How do we manage the maximum number of calculations per worker?
+---------------------------------------------------------------
+
+Answer 1
+--------
+- In the calculation library
+  - With a default.
+  - Overridable in config
+
+- The Service (calculation) base class has a get_maximum_requests_per_worker() method
+  - This defaults to some value (say 1000)
+  - You can override this for your own service - as you know how heavy / slow it is
+
+- We could also have (optional) persisted config per service
+  - Can override the maximum requests per worker
+  - Can override which servers to use for the service
+  - SRBs subscribe for this data
+    - And only create Workers when they have it
+    - They have to wait, as the servers may be restricted
+            
+

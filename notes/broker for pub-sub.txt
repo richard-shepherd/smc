@@ -1,0 +1,27 @@
+Broker for pub / sub?
+---------------------
+- Most messaging between components in point-to-point
+  - Maybe PUSH / PULL in ZMQ?
+
+- BUT: For some data, we reall need a more standard pub / sub mechanism
+  - And this needs to be reliable (unlike ZMQ pub / sub) so that a publisher
+    can connect and immediately publish, and subscribers can receive it
+  - It also needs to manage LVC-style info
+
+- This will hold current system state like:
+  - The collection of running processes and their info (connection inboxes etc)
+
+
+How does this work with ZMQ?
+----------------------------
+
+
+
+
+The only hard-coded / config info for the system?
+-------------------------------------------------
+- Maybe this is the only hard-coded info for the system
+
+- All other components register with it
+  - And are discovered by subscribing to its data
+
