@@ -3,7 +3,7 @@
     /// <summary>
     /// Holds a mathematical expression and can parse it into parts.
     /// </summary>
-    public class ExpressionInfo
+    public class Expression
     {
         #region Properties
 
@@ -13,7 +13,7 @@
         /// Note: The expression has all whitespace removed, as well 
         /// as any redundant enclosing brackets.
         /// </remarks>
-        public string Expression { get; set; } = "";
+        public string Text { get; set; } = "";
 
         /// <summary>
         /// Gets or sets whether the expression is a single constant value.
@@ -43,14 +43,14 @@
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public ExpressionInfo()
+        public Expression()
         {
         }
 
         /// <summary>
         /// Constructor from an expression.
         /// </summary>
-        public ExpressionInfo(string expression)
+        public Expression(string expression)
         {
             Expression = expression;
         }

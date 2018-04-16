@@ -9,7 +9,7 @@
         /// <summary>
         /// The original expression.
         /// </summary>
-        public ExpressionInfo OriginalExpression { get; set; } = null;
+        public Expression OriginalExpression { get; set; } = null;
 
         /// <summary>
         /// True if the expression was successfully split, false otherwise.
@@ -19,12 +19,12 @@
         /// <summary>
         /// The left hand side of the expression if it was successfully split.
         /// </summary>
-        public ExpressionInfo LHS { get; set; } = null;
+        public Expression LHS { get; set; } = null;
 
         /// <summary>
         /// The right hand side of the expression if it was successfully split.
         /// </summary>
-        public ExpressionInfo RHS { get; set; } = null;
+        public Expression RHS { get; set; } = null;
 
         /// <summary>
         /// The operator, if the expression was successfully split.
